@@ -29,12 +29,10 @@ export class DashboardComponent {
       });
   }
 
-  getBrands(){
-    this.sharedService
-   .getBrands()
-   .subscribe((responseBrands: Brand[]) => {
-        this.brands = responseBrands;
-      });
+  getBrands() {
+    this.sharedService.getBrands().subscribe((responseBrands: Brand[]) => {
+      this.brands = responseBrands.slice(0, 8);
+    });
   }
 
   getItems() {
@@ -43,12 +41,12 @@ export class DashboardComponent {
       this.categories.map((selectedCategory: Category) => {
         let items: Item[] = selectedCategory
           ? this.allItems.filter(
-              (item) =>
-                item.categoryId === selectedCategory.categoryId
+              (item) => item.categoryId === selectedCategory.categoryId
             )
           : this.allItems;
         this.items.push(items[0]);
       });
+      this.items = this.items.slice(0, 4);
     });
   }
 }
