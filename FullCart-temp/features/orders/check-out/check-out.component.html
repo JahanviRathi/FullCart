@@ -1,0 +1,167 @@
+<div class="container">
+  <h1>Shipping</h1>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="shippingForm" (ngSubmit)="placeOrder()">
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+          <input
+            id="name"
+            class="form-control"
+            type="text"
+            formControlName="Name"
+            autocomplete="off"
+            [class.is-invalid]="
+              shippingForm.get('Name').invalid &&
+              shippingForm.get('Name').touched
+            "
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              shippingForm.get('Name').invalid &&
+              shippingForm.get('Name').touched
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('Name').errors.required"
+            >
+              Name is required
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('Name').errors.pattern"
+            >
+              Name should be in alphabets
+            </div>
+          </div>
+        </div>
+        <div formGroupName="Address">
+          <label class="form-label">Address</label>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="AddLine1"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="AddLine2"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="city">City</label>
+          <input
+            id="city"
+            class="form-control"
+            type="text"
+            formControlName="City"
+            autocomplete="off"
+            [class.is-invalid]="
+              shippingForm.get('City').invalid &&
+              shippingForm.get('City').touched
+            "
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              shippingForm.get('City').invalid &&
+              shippingForm.get('City').touched
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('City').errors.required"
+            >
+              City is required
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('City').errors.pattern"
+            >
+              City should be in alphabets
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phonenumber">PhoneNumber</label>
+          <input
+            id="phonenumber"
+            class="form-control"
+            type="text"
+            formControlName="PhoneNumber"
+            autocomplete="off"
+            [class.is-invalid]="
+              shippingForm.get('PhoneNumber').invalid &&
+              shippingForm.get('PhoneNumber').touched
+            "
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+              shippingForm.get('PhoneNumber').invalid &&
+              shippingForm.get('PhoneNumber').touched
+            "
+          >
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('PhoneNumber').errors.required"
+            >
+              PhoneNumber is required
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="shippingForm.get('PhoneNumber').errors.pattern"
+            >
+              PhoneNumber should be numeric
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="shippingForm.invalid || totalQuantity === 0"
+          class="place-order"
+        >
+          Pay {{totalPrice | currency: "INR"}}
+        </button>
+      </form>
+    </div>
+    <div class="col-6 details">
+      <ng-template #empty>
+        <h2>Your cart is empty</h2>
+      </ng-template>
+      <div class="card" *ngIf="totalQuantity != 0; else empty">
+        <div class="card-body">
+          <h4 class="card-title">Order Summary</h4>
+          <p class="card-text">
+            You have {{ totalQuantity }} {{ totalQuantityMsg }} in your shopping
+            cart.
+          </p>
+          <ul class="list-group list-group-flush row">
+            <li class="list-group-item" *ngFor="let cartItem of cart.cartItems">
+              <div class="col price-detail">
+                {{ cartItem.quantityInCart }} x {{ cartItem.item.name }}
+                <div class="col price">
+                  {{ cartItem.item.price * cartItem.quantityInCart | currency : "INR" }}
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item total-price">
+              Total
+              <div class="price">
+                {{ totalPrice | currency : "INR" }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

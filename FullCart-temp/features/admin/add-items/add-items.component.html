@@ -1,0 +1,168 @@
+<h1 class="heading">{{ text }} Item</h1>
+<div class="row add-form">
+  <div class="col-md-6">
+    <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Item Name:</label>
+        <input
+          id="name"
+          class="form-control"
+          type="text"
+          formControlName="name"
+          [class.is-invalid]="
+            itemForm.get('name')?.invalid && itemForm.get('name')?.touched
+          "
+        />
+        <div
+          class="text-danger"
+          *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched"
+        >
+          Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="desc">Description:</label>
+        <input
+          id="desc"
+          class="form-control"
+          type="text"
+          formControlName="description"
+        />
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select
+          id="category"
+          class="form-control"
+          formControlName="categoryId"
+          [class.is-invalid]="
+            itemForm.get('categoryId')?.invalid && itemForm.get('categoryId')?.touched
+          "
+        >
+          <option
+            *ngFor="let category of categories"
+            [value]="category.categoryId"
+          >
+            {{ category.categoryName }}
+          </option>
+        </select>
+        <div
+          class="text-danger"
+          *ngIf="
+            itemForm.get('categoryId')?.invalid && itemForm.get('categoryId')?.touched
+          "
+        >
+          Category is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="brand">Brand:</label>
+        <select
+          id="brand"
+          class="form-control"
+          formControlName="brandId"
+          [class.is-invalid]="
+            itemForm.get('brandId')?.invalid && itemForm.get('brandId')?.touched
+          "
+        >
+          <option *ngFor="let brand of brands" [value]="brand.brandId">
+            {{ brand.brandName }}
+          </option>
+        </select>
+        <div
+          class="text-danger"
+          *ngIf="itemForm.get('brandId')?.invalid && itemForm.get('brandId')?.touched"
+        >
+          Brand is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&#8377;</span>
+          </div>
+          <input
+            id="price"
+            class="form-control"
+            type="number"
+            formControlName="price"
+            [class.is-invalid]="
+              (itemForm.get('price')?.invalid &&
+                itemForm.get('price')?.touched) ||
+              itemForm.get('price')?.value < 0
+            "
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="itemForm.get('price')?.invalid && itemForm.get('price')?.touched"
+        >
+          Price is required
+        </div>
+        <div class="text-danger" *ngIf="itemForm.get('price')?.value < 0">
+          Price should be 0 or higher
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">&#8377;</span>
+          </div>
+          <input
+            id="quantity"
+            class="form-control"
+            type="number"
+            formControlName="quantity"
+            [class.is-invalid]="
+              (itemForm.get('quantity')?.invalid &&
+                itemForm.get('quantity')?.touched) ||
+              itemForm.get('quantity')?.value < 0
+            "
+          />
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            itemForm.get('quantity')?.invalid && itemForm.get('quantity')?.touched
+          "
+        >
+          Quantity is required
+        </div>
+        <div class="text-danger" *ngIf="itemForm.get('quantity')?.value < 0">
+          Quantity should be 0 or higher
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image Url:</label>
+        <input
+          id="imageUrl"
+          class="form-control"
+          type="text"
+          formControlName="imageUrl"
+        />
+      </div>
+      <button
+        type="submit"
+        [disabled]="
+          itemForm.invalid ||
+          itemForm.get('price')?.value < 0 ||
+          itemForm.get('quantity')?.value < 0
+        "
+        class="action-button"
+      >
+        {{ text }}
+      </button>
+      <span class="action-button cancel" routerLink="/admin/items">
+        Cancel
+      </span>
+    </form>
+  </div>
+  <div class="col-md-6 item-card">
+    <app-item-card
+      [item]="itemForm.value"
+      [showActions]="false"
+    ></app-item-card>
+  </div>
+</div>

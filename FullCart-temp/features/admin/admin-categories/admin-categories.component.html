@@ -1,0 +1,67 @@
+<div class="category-box">
+  <div>
+    <a class="add-button" (click)="addCat = !addCat">Add Category</a>
+  </div>
+  <div *ngIf="addCat">
+    <div class="form">
+      <div class="input-group">
+        <div class="">
+          <label class="form-label" for="categoryName">Category Name</label>
+          <input
+            type="text"
+            id="categoryName"
+            class="form-control"
+            #categoryName
+          />
+        </div>
+        <div class="">
+          <label class="form-label" for="imageUrl">Image Url</label>
+          <input type="text" id="imageUrl" class="form-control" #imageUrl />
+        </div>
+        <div class="input-group-append">
+          <button
+            class="input-add-button"
+            (click)="addCategory(categoryName.value, imageUrl.value)"
+          >
+            +
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container tableData">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <!-- <th></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let category of categories
+              | slice : (page - 1) * pageSize : page * pageSize
+          "
+        >
+          <td>{{ category.categoryName }}</td>
+          <!-- <td class="tableDataDel">
+            <a (click)="updateCategory(category)" class="edit"
+              ><i class="fas fa-edit"></i
+                ></a>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="categories.length"
+    >
+    </ngb-pagination>
+  </div>
+</div>

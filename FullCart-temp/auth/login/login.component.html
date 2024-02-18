@@ -1,0 +1,60 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+  <h3>Login</h3>
+  <div>
+    <label class="form-label">Email address</label>
+    <input
+      type="email"
+      class="form-control"
+      formControlName="email"
+      autocomplete="off"
+      [class.is-invalid]="
+        loginForm.get('email').invalid && loginForm.get('email').touched
+      "
+    />
+    <span
+      class="text-danger"
+      *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+      >Please enter valid email!</span
+    >
+  </div>
+
+  <div>
+    <label class="form-label">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      formControlName="password"
+      autocomplete="off"
+      [class.is-invalid]="
+        loginForm.get('password').invalid && loginForm.get('password').touched
+      "
+    />
+    <span
+      class="text-danger"
+      *ngIf="
+        loginForm.get('password').invalid && loginForm.get('password').touched
+      "
+    >
+      <span
+        class="text-danger"
+        *ngIf="loginForm.get('password').errors.minlength"
+        >Password length should be greater then 6!</span
+      >
+      <span
+        class="text-danger"
+        *ngIf="loginForm.get('password').errors.required"
+        >Password is required!</span
+      >
+    </span>
+  </div>
+
+  <button type="submit" class="logButton">Log in</button>
+
+  <div class="text-center">
+    <p>
+      Not a member?
+      <a routerLink="/register" routerLinkActive="active" class="text-italic">Register</a>
+    </p>
+  </div>
+</form>
+<div class="login-form"></div>

@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="search col-6">
+      <input
+        type="text"
+        class="form-control searchInput"
+        placeholder="Search..."
+        #query
+        (keyup)="filter(query.value)"
+      />
+    </div>
+    <div class="col-6 sort">
+      <div class="alpha">
+        <i class="fa-solid fa-arrow-down-a-z" (click)="sort('alpha', 1)"></i>
+        <i class="fa-solid fa-arrow-up-a-z" (click)="sort('alpha' , -1)"></i>
+      </div>
+      <div class="numeric">
+        <i class="fa-solid fa-arrow-down-1-9" (click)="sort('num' , 1)"></i>
+        <i class="fa-solid fa-arrow-up-1-9" (click)="sort('num' , -1)"></i>
+      </div>
+    </div>
+  </div>
+  <div class="row item">
+      <div class="col-3">
+        <app-item-filter [selectedCategory]="selectedCategory"></app-item-filter>
+      </div>
+      <div class="col" >
+        <ng-template #empty>
+          <h3>No Products to display</h3>
+        </ng-template>
+        <div class="row" *ngIf="items.length; else empty">
+          <ng-container *ngFor="let item of items; let i = index">
+            <div class="col">
+              <app-item-card [item]="item" [showActions]="true"></app-item-card>
+            </div>
+            <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    
+</div>

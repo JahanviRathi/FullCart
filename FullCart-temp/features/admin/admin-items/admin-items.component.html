@@ -1,0 +1,102 @@
+<div class="item-box">
+  <div class="row">
+    <div class="col-2">
+      <p>
+        <a
+          routerLink="/admin/items/new"
+          routerLinkActive="active"
+          class="add-button"
+          >Add Item</a
+        >
+      </p>
+    </div>
+    <div class="col-3">
+      <p>
+        <a
+        (click)="excelAction('add')"
+          class="add-button"
+          >Add Item From Excel</a
+        >
+      </p>
+    </div>
+    <div class="col-3">
+      <p>
+        <a (click)="excelAction('update')" class="add-button"
+          >Update Item From Excel</a
+        >
+      </p>
+    </div>
+  </div>
+  <div *ngIf="fromExcel">
+    <div class="form excel">
+      <div class="input-group">
+        <div class="col-6">
+          <label class="form-label" for="filePath">FilePath</label>
+          <input type="text" id="filePath" class="form-control" #filePath />
+        </div>
+        <div class="col-3 button-excel">
+          <button
+            class="input-add-button btn-primary btn"
+            (click)="actionFromExcel(filePath.value)"
+          >
+            ->
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #empty>
+    <h3 class="empty">No Products to display</h3>
+  </ng-template>
+
+  <div *ngIf="this.items.length; else empty">
+    <div class="search">
+      <input
+        type="text"
+        class="form-control searchInput"
+        placeholder="Search..."
+        #query
+        (keyup)="filter(query.value)"
+      />
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let item of items | slice : (page - 1) * pageSize : page * pageSize
+          "
+        >
+          <td>{{ item.name }}</td>
+          <td class="price">{{ item.price | currency : "INR" }}</td>
+          <td>
+            <a [routerLink]="['/admin/items/', item.id]" class="edit"
+              ><i class="fas fa-edit"></i
+            ></a>
+          </td>
+          <td>
+            <a (click)="delItem(item)" class="del"
+              ><i class="fas fa-trash"></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container">
+      <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="items.length"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

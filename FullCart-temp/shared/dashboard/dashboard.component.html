@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div [routerLink]="['/items']">
+        <img
+          src="https://rukminim2.flixcart.com/flap/128/128/image/f15c02bfeb02d15d.png?q=100"
+          class="img"
+        />
+        <div class="text">All Products</div>
+      </div>
+    </div>
+    <div class="col" *ngFor="let category of categories">
+      <div
+        [routerLink]="['/items']"
+        [queryParams]="{ category: category.categoryId }"
+      >
+        <img
+          *ngIf="category.imageUrl"
+          src="{{ category.imageUrl }}"
+          class="img"
+        />
+        <div class="text">{{ category.categoryName }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rec-top">
+  <div class="row rec-text">
+    <h2>Shop by Brands</h2>
+  </div>
+  <div class="row">
+    <div class="col rec-items">
+      <div class="row">
+        <div class="col" *ngFor="let brand of brands">
+          <div
+            [routerLink]="['/items']"
+            [queryParams]="{ brand: brand.brandId }"
+          >
+            <img
+              *ngIf="brand.imageUrl"
+              src="{{ brand.imageUrl }}"
+              class="img"
+            />
+            <div class="text">{{ brand.brandName }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rec-top">
+  <div class="row rec-text">
+    <h2>Recommended Items</h2>
+  </div>
+  <div class="row">
+    <div class="col rec-items">
+      <div class="row">
+        <ng-container *ngFor="let item of items; let i = index">
+          <div *ngIf="item" class="col rec-card">
+            <div class="card">
+              <img
+                class="card-img-top"
+                src="{{ item.imageUrl }}"
+                *ngIf="item.imageUrl"
+                [routerLink]="['/item-details', item.id]"
+              />
+              <a
+                class="wishlist"
+                [routerLink]="['/wishlist', item.id]"
+                routerLinkActive="active"
+                ><i class="fas fa-heart"></i
+              ></a>
+              <div class="card-body">
+                <span class="card-title">{{ item.name }}</span>
+                <p class="card-text">{{ item.price | currency : "INR" }}</p>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="info-container">
+    <div class="contact-nav">
+      <div>
+        <i class="fa fa-phone contact-nav-icon" aria-hidden="true"></i>
+        <span>Call : +91 1234567890</span>
+      </div>
+      <div>
+        <i class="fa fa-envelope contact-nav-icon" aria-hidden="true"></i>
+        <span>Email : demo@gmail.com</span>
+      </div>
+      <div>
+        <i class="fa fa-map-marker contact-nav-icon" aria-hidden="true"></i>
+        <span>Location : xyz , India</span>
+      </div>
+    </div>
+    <div class="social-box">
+      <a href="https://www.facebook.com/">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://twitter.com/">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="https://linkedin.com">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+      <a href="https://www.instagram.com/">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>

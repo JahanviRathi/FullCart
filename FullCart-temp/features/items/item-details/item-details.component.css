@@ -1,0 +1,47 @@
+.container {
+  margin-top: 100px;
+}
+
+img {
+  width: 80px;
+  height: 300px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-style: italic;
+  color: gray;
+}
+
+.col-md-7 {
+  color: #555;
+}
+
+.price-text {
+  color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.price {
+  color: #fe980f;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.cart {
+  background-color: #615a51;
+  color: #fff;
+  font-size: 15px;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+}
+
+.wishlist {
+  background-color: #28a118;
+  color: #fff;
+  font-size: 15px;
+  margin-left: 60px;
+}

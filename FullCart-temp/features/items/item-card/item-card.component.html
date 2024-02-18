@@ -1,0 +1,24 @@
+<div *ngIf="item.name" class="card">
+  <img
+    class="card-img-top"
+    src="{{ item.imageUrl }}"
+    *ngIf="item.imageUrl"
+    [routerLink]="['/item-details', item.id]"
+  />
+  <a
+    *ngIf="showActions"
+    class="wishlist"
+    [routerLink]="['/wishlist', item.id]"
+    routerLinkActive="active"
+    ><i class="fas fa-heart"></i
+  ></a>
+
+  <div class="card-body">
+    <h4 class="card-title">{{ item.name }}</h4>
+    <p class="card-text brand-name">{{ item.brand.brandName }}</p>
+    <p class="card-text">{{ item.price | currency : "INR" }}</p>
+  </div>
+  <div class="card-footer" *ngIf="showActions">
+    <app-add-to-cart [item]="item"></app-add-to-cart>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<h1>Orders</h1>
+<div class="container" *ngFor="let order of orderDetails">
+  <div class="row">
+    <div class="col-6">
+      <p class="cust-name">Customer Name : {{ order.shippingDetails.name }}</p>
+    </div>
+    <div class="col-3 order-text">
+      <span>{{ getOrderStatus(order.status) }}</span>
+    </div>
+    <div class="col-3">
+      <button
+        (click)="cancelOrder(order.orderId)"
+        class="btn btn-danger btn-sm cancel-btn"
+        *ngIf="order.status != 1"
+      >
+        Cancel Order
+      </button>
+    </div>
+  </div>
+  <div class="row order-box" *ngFor="let orderItem of order.products">
+    <div class="col-6">
+      <div class="row">
+        <div class="col-3">
+          <img src="{{ orderItem.item.imageUrl }}" />
+        </div>
+        <div class="col-8 name">
+          <span>{{ orderItem.item.name }}</span>
+          <br />
+          <span class="desc">Qty: {{ orderItem.quantity }}</span
+          ><br />
+          <span class="desc"
+            >Price: {{ orderItem.item.price | currency : "INR" }}</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col-2 item-price">{{ orderItem.price | currency : "INR" }}</div>
+    <div class="col-4">
+      <span>Ordered on: {{ order.datePlaced | date }}</span>
+      <br />
+      <span
+        >Shipping Address : {{ order.shippingDetails.address }} ,
+        {{ order.shippingDetails.city }}</span
+      >
+    </div>
+  </div>
+</div>

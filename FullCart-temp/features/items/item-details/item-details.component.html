@@ -1,0 +1,22 @@
+<div class="container" *ngIf="item">
+  <div class="row">
+    <div class="col-md-5">
+      <img src="{{ item.imageUrl }}" alt="" class="d-block w-100" />
+    </div>
+    <div class="col-md-7">
+      <h4 class="brand-name">{{item.brand.brandName}}</h4>
+      <h2 class="item-name">{{ item.name }}</h2>
+      <p>{{ item.description }}</p>
+      <p class="price-text">Special Price</p>
+      <p class="price">{{ item.price | currency: "INR" }}</p>
+      <app-add-to-cart class="cart" [item]="item"></app-add-to-cart>  
+      <button
+        class="btn btn-default wishlist"
+        [routerLink]="['/wishlist', item.id]"
+        routerLinkActive="active"
+      >
+        <i class="fas fa-heart"></i> Add to Wishlist
+      </button>
+    </div>
+  </div>
+</div>
