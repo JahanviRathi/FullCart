@@ -1,68 +1,46 @@
 <div class="brand-box">
-    <div>
-      <a class="add-button" (click)="addCat = !addCat">Add Brand</a>
-    </div>
-    <div *ngIf="addCat">
-      <div class="form">
-        <div class="input-group">
-          <div class="">
-            <label class="form-label" for="brandName">Brand Name</label>
-            <input
-              type="text"
-              id="brandName"
-              class="form-control"
-              #brandName
-            />
-          </div>
-          <div class="">
-            <label class="form-label" for="imageUrl">Image Url</label>
-            <input type="text" id="imageUrl" class="form-control" #imageUrl />
-          </div>
-          <div class="input-group-append">
-            <button
-              class="input-add-button"
-              (click)="addBrand(brandName.value, imageUrl.value)"
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="container tableData">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Brand</th>
-            <!-- <th></th> -->
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="
-              let brand of brands
-                | slice : (page - 1) * pageSize : page * pageSize
-            "
-          >
-            <td>{{ brand.brandName }}</td>
-            <!-- <td class="tableDataDel">
-              <a (click)="updateBrand(brand)" class="edit"
-                ><i class="fas fa-edit"></i
-                  ></a>
-            </td> -->
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div class="container">
-      <ngb-pagination
-        [(page)]="page"
-        [pageSize]="pageSize"
-        [collectionSize]="brands.length"
-      >
-      </ngb-pagination>
-    </div>
+  <div>
+    <a
+      class="add-button"
+      routerLink="/admin/brands/new"
+      routerLinkActive="active"
+      class="add-button"
+      >Add Brand</a
+    >
   </div>
-  
+
+  <div class="container tableData">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let brand of brands
+              | slice : (page - 1) * pageSize : page * pageSize
+          "
+        >
+          <td>{{ brand.brandName }}</td>
+          <td class="tableDataDel">
+            <a [routerLink]="['/admin/brands/', brand.brandId]" class="edit"
+              ><i class="fas fa-edit"></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <ngb-pagination
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [collectionSize]="brands.length"
+    >
+    </ngb-pagination>
+  </div>
+</div>

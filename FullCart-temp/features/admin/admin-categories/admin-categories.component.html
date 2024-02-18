@@ -1,33 +1,12 @@
 <div class="category-box">
   <div>
-    <a class="add-button" (click)="addCat = !addCat">Add Category</a>
-  </div>
-  <div *ngIf="addCat">
-    <div class="form">
-      <div class="input-group">
-        <div class="">
-          <label class="form-label" for="categoryName">Category Name</label>
-          <input
-            type="text"
-            id="categoryName"
-            class="form-control"
-            #categoryName
-          />
-        </div>
-        <div class="">
-          <label class="form-label" for="imageUrl">Image Url</label>
-          <input type="text" id="imageUrl" class="form-control" #imageUrl />
-        </div>
-        <div class="input-group-append">
-          <button
-            class="input-add-button"
-            (click)="addCategory(categoryName.value, imageUrl.value)"
-          >
-            +
-          </button>
-        </div>
-      </div>
-    </div>
+    <a
+      class="add-button"
+      routerLink="/admin/categories/new"
+      routerLinkActive="active"
+      class="add-button"
+      >Add Category</a
+    >
   </div>
 
   <div class="container tableData">
@@ -35,7 +14,7 @@
       <thead>
         <tr>
           <th>Category</th>
-          <!-- <th></th> -->
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -46,11 +25,11 @@
           "
         >
           <td>{{ category.categoryName }}</td>
-          <!-- <td class="tableDataDel">
-            <a (click)="updateCategory(category)" class="edit"
+          <td class="tableDataDel">
+            <a [routerLink]="['/admin/categories/', category.categoryId]" class="edit"
               ><i class="fas fa-edit"></i
-                ></a>
-          </td> -->
+            ></a>
+          </td>
         </tr>
       </tbody>
     </table>

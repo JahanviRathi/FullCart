@@ -23,8 +23,6 @@ export class AdminGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     var isAdmin: number = +localStorage.getItem('admin');
-    console.log(isAdmin);
-
     if (isAdmin == 0) {
       this.router.navigate(['/dashboard']);
       return false;

@@ -89,8 +89,6 @@ export class CheckOutComponent implements OnInit {
     this.orderService
       .placeOrder(this.orderItems, this.shippingDetails, this.currentUserId)
       .subscribe((order: Order) => {
-        console.log(order);
-
         this.cartService.clearCart(this.currentUserId);
         this.shippingForm.reset();
         this.toastr.success('Order Placed Successfully!', 'Success');

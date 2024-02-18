@@ -28,7 +28,8 @@ export class WishlistComponent implements OnInit, OnDestroy {
     private sharedService: SharedService,
     private wishlistService: WishlistService,
     private authService: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -48,11 +49,7 @@ export class WishlistComponent implements OnInit, OnDestroy {
     this.wishlistService
       .addToWishlist(this.id, this.userId)
       .subscribe((wishlist: Wishlist) => {
-        console.log(wishlist);
-
-        this.wishlist = wishlist;
-        this.totalWishlistItems = wishlist.wishlistItems.length;
-        this.msg = this.totalWishlistItems === 1 ? 'item' : 'items';
+        this.router.navigate(['/wishlist']);
         this.toastr.success('Item added to wishlist successfully!!');
       });
   }
@@ -76,9 +73,15 @@ export class WishlistComponent implements OnInit, OnDestroy {
       this.wishlistService
         .removeItem(item.id, this.userId)
         .subscribe((wishlist: Wishlist) => {
-          this.wishlist = wishlist;
-          this.totalWishlistItems = wishlist.wishlistItems.length;
-          this.msg = this.totalWishlistItems === 1 ? 'item' : 'items';
+          console.log(wishlist);
+
+          if (wishlist) {
+            this.wishlist = wishlist;
+            this.totalWishlistItems = wishlist.wishlistItems.length;
+            this.msg = this.totalWishlistItems === 1 ? 'item' : 'items';
+          } else {
+            this.wishlist = null;
+          }
           this.toastr.success(
             item.name + ' removed from wishlist successfully!!'
           );

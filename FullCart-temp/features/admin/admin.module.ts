@@ -11,6 +11,8 @@ import { SharedModule } from 'shared/shared.module';
 import { ItemsModule } from 'features/items/items.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminBrandsComponent } from './admin-brands/admin-brands.component';
+import { AddBrandsComponent } from './add-brands/add-brands.component';
+import { AddCategoriesComponent } from './add-categories/add-categories.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { AdminBrandsComponent } from './admin-brands/admin-brands.component';
     AddItemsComponent,
     AdminItemsComponent,
     AdminBrandsComponent,
+    AddBrandsComponent,
+    AddCategoriesComponent,
   ],
   imports: [
     CommonModule,

@@ -82,7 +82,8 @@ namespace FullCart_WebAPI.Repositories
             if (wishlistItem == null)
                 return null;
 
-            wishlist.WishlistItems.Remove(wishlistItem);
+            wishlist.WishlistItems = wishlist.WishlistItems.Where((item) =>
+            item.ItemId != wishlistItem.ItemId).ToList();
 
             await _dataContext.SaveChangesAsync();
             return await GetWishlistItems(CustomerId);

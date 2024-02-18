@@ -15,7 +15,9 @@
 
   <div class="card-body">
     <h4 class="card-title">{{ item.name }}</h4>
-    <p class="card-text brand-name">{{ item.brand.brandName }}</p>
+    <p class="card-text brand-name" *ngIf="item.brand">
+      {{ item.brand.brandName }}
+    </p>
     <p class="card-text">{{ item.price | currency : "INR" }}</p>
   </div>
   <div class="card-footer" *ngIf="showActions">

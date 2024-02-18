@@ -17,6 +17,8 @@ import { ItemDetailsComponent } from 'features/items/item-details/item-details.c
 import { AuthGuard } from 'auth/auth.guard';
 import { AdminGuard } from 'auth/admin.guard';
 import { AdminBrandsComponent } from 'features/admin/admin-brands/admin-brands.component';
+import { AddBrandsComponent } from 'features/admin/add-brands/add-brands.component';
+import { AddCategoriesComponent } from 'features/admin/add-categories/add-categories.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -72,8 +74,28 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminGuard],
   },
   {
+    path: 'admin/categories/new',
+    component: AddCategoriesComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/categories/:id',
+    component: AddCategoriesComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
     path: 'admin/brands',
     component: AdminBrandsComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/brands/new',
+    component: AddBrandsComponent,
+    canActivate: [AuthGuard, AdminGuard],
+  },
+  {
+    path: 'admin/brands/:id',
+    component: AddBrandsComponent,
     canActivate: [AuthGuard, AdminGuard],
   },
   { path: '**', component: PageNotFoundComponent },

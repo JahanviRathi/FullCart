@@ -45,7 +45,9 @@ export class AdminService {
     let params = new HttpParams().set('filePath', filePath);
 
     return this.httpClient.put<Item[]>(
-      this.adminApiUrl + '/items/excel', null, {params}
+      this.adminApiUrl + '/items/excel',
+      null,
+      { params }
     );
   }
 
@@ -58,5 +60,24 @@ export class AdminService {
 
   addBrand(brand: Brand): Observable<Brand[]> {
     return this.httpClient.post<Brand[]>(this.adminApiUrl + '/brands', brand);
+  }
+
+  updateBrand(brand: Brand): Observable<Brand> {
+    return this.httpClient.put<Brand>(this.adminApiUrl + '/brands', brand);
+  }
+
+  getBrandById(id: number): Observable<Brand> {
+    return this.httpClient.get<Brand>(this.adminApiUrl + '/brands/' + id);
+  }
+
+  updateCategory(category: Category): Observable<Category> {
+    return this.httpClient.put<Category>(
+      this.adminApiUrl + '/categories',
+      category
+    );
+  }
+
+  getCategoryById(id: number): Observable<Category> {
+    return this.httpClient.get<Category>(this.adminApiUrl + '/categories/' + id);
   }
 }

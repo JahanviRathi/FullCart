@@ -1,0 +1,63 @@
+<h1 class="heading">{{ text }} Category</h1>
+<div class="row add-form">
+  <div class="col-md-6">
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="categoryName">Category Name:</label>
+        <input
+          id="categoryName"
+          class="form-control"
+          type="text"
+          formControlName="categoryName"
+          [class.is-invalid]="
+            categoryForm.get('categoryName')?.invalid &&
+            categoryForm.get('categoryName')?.touched
+          "
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            categoryForm.get('categoryName')?.invalid &&
+            categoryForm.get('categoryName')?.touched
+          "
+        >
+          Category Name is required
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image Url:</label>
+        <input
+          id="imageUrl"
+          class="form-control"
+          type="text"
+          formControlName="imageUrl"
+        />
+      </div>
+      <button
+        type="submit"
+        [disabled]="categoryForm.invalid"
+        class="action-button"
+      >
+        {{ text }}
+      </button>
+      <span class="action-button cancel" routerLink="/admin/categories">
+        Cancel
+      </span>
+    </form>
+  </div>
+  <div
+    class="col-md-6 category-card"
+    *ngIf="categoryForm.get('categoryName').value || categoryForm.get('imageUrl').value"
+  >
+    <img
+      class="card-img-top"
+      src="{{ categoryForm.get('imageUrl').value }}"
+      *ngIf="categoryForm.get('imageUrl').value"
+    />
+    <div class="card-body" *ngIf="categoryForm.get('categoryName').value">
+      <h4 class="card-title">
+        Category Name : {{ categoryForm.get("categoryName").value }}
+      </h4>
+    </div>
+  </div>
+</div>

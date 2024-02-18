@@ -37,9 +37,6 @@ export class AddItemsComponent implements OnInit {
       quantity: new FormControl(null, Validators.required),
       imageUrl: new FormControl(null),
     });
-    this.itemForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
   }
 
   ngOnInit(): void {

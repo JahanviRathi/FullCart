@@ -43,8 +43,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   cancelOrder(orderId: number): void {
     this.orderService.cancelOrder(orderId).subscribe((order: Order) => {
-      console.log(order);
-
       this.getOrder(this.userId);
     });
   }
